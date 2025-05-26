@@ -1,6 +1,5 @@
-// ##### https://learn.jquery.com/about-jquery/
+// https://learn.jquery.com/
 // ######################### core ######################### //
-
 
 /*** .READY() ***/
 // first jquery detects that state is ready or not with this
@@ -164,13 +163,12 @@
 /*** .GET() ***/
 // we have three way for selecting element with their number 
 // first is using eq(num) we put a number from 0 to ... and it will select the first 
-// number is 0
+// it return in jquery concept
 // second is using get(num) we put a number from 0 to ... and it will return the element like this
-// <div>hello there</div>
-// we cant put attr or width or any object in this element (it is native HTML)
+// it return a dom opject we cant change it with jquery methods (its native html)
 // third is using number like putting number in an array
 // let ALL__DIV = $("div")[0];
-// we cant put attr or width or any object in this element (it is native HTML)
+// it return a dom opject we cant change it with jquery methods (its native html)
 
 
 /*** CHECKING SAME ELEMENT ***/
@@ -267,6 +265,13 @@
 // $(".element").data("id", "392059037209382");
 // you can give the value like this it will return "392059037209382"
 // $(".element").data("id"); 
+
+
+/*** $(this) ***/
+// we can get the clicked element as jquery obj with $(this) and function(){}
+// $(".container").click(function(){
+// const $this = $(this);
+// })
 
 
 /*** UTILITY METHODS ***/
