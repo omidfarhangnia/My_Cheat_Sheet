@@ -286,7 +286,9 @@
 // we can use .extend() for this it will check that the first object property has the second
 // if it has it will put the value of second object property put first object property and if 
 // first object property doesn't have the second object property it will put it completely
-// $.extend( firstObject, secondObject );
+// $.extend( firstObject, secondObject ); this is a way for shallow copy
+// we use {} for avoid changing the firstObject
+// $.extend(true, {}, firstObject, secondObject ); this is a way for deep copy
 // we can send something as this in function
 // var myFunction = function() {
 //     console.log( this );
@@ -296,6 +298,11 @@
 // };
 // var myProxyFunction = $.proxy( myFunction, myObject );
 // myProxyFunction(); // myObject
+// $.type() for checking the type of an element
+// $.type( true ); // "boolean"
+// $.type( 3 ); // "number"
+// $.type( "test" ); // "string"
+// $.type( function() {} ); // "function"
 
 
 /*** EACH REQUIRED ***/
@@ -316,6 +323,14 @@
 // .scrollTop() (getter)
 // .val() (getter)
 // .width() (getter)
+
+
+/*** .PROP() ***/
+// setting and getting properties of elements
+//   $(".myInput").prop({
+//     required: true,
+//     disabled: true,
+//   });
 
 
 /*** .MAP() ***/
@@ -349,6 +364,7 @@
 
 /*** .CLICK ***/
 // .click is shorthand for .on(click, func)
+
 
 /*** JQUERY TIP NUM 1 ***/
 // for using jquery on an element in this situation i should add $( this )
@@ -448,9 +464,9 @@
 
 /*** PASSING DATA TO THE EVENT HANDLER ***/
 // we can pass our own data to and element with
-// $(".element", {name: "name"}, function(event) {
-//      console.log(event.data)
-// }) 
+// $(".element").on("click", { name: "omid", age: 30 }, function (event) {
+//   console.log(event.data);
+// });
 // it will return {name: "name"}
 
 
@@ -476,7 +492,8 @@
 // load // when something loaded the function will play
 // mouseenter // having event with going mouse on element
 // mouseleave // having event with leaving mouse on element
-
+// hover // having event with going mouse on element and leaving mouse from element
+// ready // when the page is ready this function will play
 
 
 // ######################### effect ######################### //
@@ -560,6 +577,7 @@
 // $(".element").click(function(){
 //     $("body *").filter(":animated").stop();
 // })
+// stop(true, true); // the first true is for clearing the queue and the second true is for finishing the current animation
 
 
 // .DELAY()
