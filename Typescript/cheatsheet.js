@@ -282,6 +282,13 @@
 // type pKey = "x" | "y" | "name"
 
 
+/*** AS CONST ***/
+// let x = "hello"; // type: string
+// const y = "world"; // type: "world" (literal type)
+// const z = { a: 1, b: "test" }; // type: { a: number; b: string; }
+// const w = { a: 1, b: "test" } as const; // type: { readonly a: 1; readonly b: "test"; }
+
+
 /*** ENUM VS OBJ AS CONST ***/
 // const enum EDirection {
 //   Up,
@@ -297,380 +304,338 @@
 // } as const;
 
 
-// turning anything to boolean with 
-Boolean("hello") ==> true or !!"hello" ==> true
+/*** BOOLEAN() ***/
+// turning anything to boolean
+// let myType1 = Boolean("lslsls"); // true
+// let myType2 = !!0; // false
+// let myType3 = !!"0"; // true
 
+
+/*** IN ***/
+// *** JS exmaple ***
 // checking an object has a special property
-const data = {
-  name: "hello there"
-}
+// const data = {
+//   name: "hello there"
+// }
+// if("name" in data) {
+//   console.log("name is located")
+// }
+// *** TYPESCRIPT example ***
+// interface One {
+//   name: string;
+// }
+// interface Two {
+//   firstName: string;
+// }
+// function MyFunc(obj: One | Two) {
+//   if ("name" in obj) {
+//     console.log(obj.name);
+//   } else {
+//     console.log(obj.firstName);
+//   }
+// }
 
-if("name" in data) {
-  console.log("name is located")
-}
 
--- typescript example 
-interface One {
-  name: string;
-}
+/*** INSTANCEOF NARROWING ***/
+// narrowing classes
+// class MyClass1 {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+// }
+// class MyClass2 {
+//   firstName: string;
+//   constructor(firstName: string) {
+//     this.firstName = firstName;
+//   }
+// }
+// function getData(obj: MyClass1 | MyClass2) {
+//   if (obj instanceof MyClass1) {
+//     console.log(obj.name);
+//   } else {
+//     console.log(obj.firstName);
+//   }
+// }
 
-interface Two {
-  firstName: string;
-}
 
-function MyFunc(obj: One | Two) {
-  if ("name" in obj) {
-    console.log(obj.name);
-  } else {
-    console.log(obj.firstName);
-  }
-}
+/*** TYPE PREDICATES (IS) ***/
+// interface Fish {
+//   swim: () => void;
+// }
+// interface Bird {
+//   fly: () => void;
+// }
+// the function says: pet is fish return the final resulf of our test
+// function isFish(pet: Fish | Bird): pet is Fish {
+//   // `pet as fish` is a temporary access for swim method for checking our test
+//   return (pet as Fish).swim !== undefined;
+// }
+// function checkAnimal(pet: Fish | Bird) {
+//   if (isFish(pet)) {
+//     pet.swim();
+//   } else {
+//     pet.fly();
+//   }
+// }
 
-// instanceof Narrowing
-class MyClass1 {
-  name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
-}
 
-class MyClass2 {
-  firstName: string;
-  constructor(firstName: string) {
-    this.firstName = firstName;
-  }
-}
+/*** APPLY AND CALL IN TS ***/
+// interface Person {
+//   name: string;
+// }
+// const person: Person = { name: "ali" };
+// *** APPLY ***
+// function greet1(this: Person, param1: string, param2: string, param3: string) {
+//   console.log(param1 + " " + this.name + " " + param2 + " " + param3);
+// }
+// greet1.apply(person, ["one", "two", "three"]); // one ali two three
+// *** CALL ***
+// function greet2(this: Person, param1: string, param2: string, param3: string) {
+//   console.log(param1 + " " + this.name + " " + param2 + " " + param3);
+// }
+// greet2.call(person, "one", "two", "three"); // one ali two three
 
-function getData(obj: MyClass1 | MyClass2) {
-  if (obj instanceof MyClass1) {
-    console.log(obj.name);
-  } else {
-    console.log(obj.firstName);
-  }
-}
 
-// type predicates
-interface Fish {
-  swim: () => void;
-}
-
-interface Bird {
-  fly: () => void;
-}
-
-// pet is fish return the final resulf of our test
-function isFish(pet: Fish | Bird): pet is Fish {
-  // pet as fish is a temporary access for swim method for checking our test
-  return (pet as Fish).swim !== undefined;
-}
-
-function checkAnimal(pet: Fish | Bird) {
-  if (isFish(pet)) {
-    pet.swim();
-  } else {
-    pet.fly();
-  }
-}
-
-// apply and call in typescript
-interface Person {
-  name: string;
-}
-const person: Person = { name: "ali" };
-
-function greet1(this: Person, param1: string, param2: string, param3: string) {
-  console.log(param1 + " " + this.name + " " + param2 + " " + param3);
-}
-
-greet1.apply(person, ["one", "two", "three"]); ==> one ali two three
-
-function greet2(this: Person, param1: string, param2: string, param3: string) {
-  console.log(param1 + " " + this.name + " " + param2 + " " + param3);
-}
-
-greet2.call(person, "one", "two", "three"); ==> one ali two three
-
+/*** REDUCE IN TS ***/
 // reduce in typescript (we dont need any type because of type inference)
-
-const strings = ["omid", "lslsl", "sssss", "lslslssl"];
-
-const sum = strings.reduce((acc, curr) => {
-  return acc + " " + curr;
-}, "");
-
-console.log(sum);
-
-// function type expressions
-type FuncType = (a: string) => void;
-
-function secondFunc(func: FuncType, p1: string) {
-  func(p1);
-}
-
-function saySomething(a: string) {
-  console.log("hello there " + a);
-}
-
-secondFunc(saySomething, "omid");
-
-// function overload
-function FuncOver(str: string, name: string, age: number): void;
-function FuncOver(a: number, b: number): number;
-function FuncOver(
-  strOrA: string | number,
-  nameOrB: string | number,
-  age?: number
-): void | number {
-  if (typeof strOrA === "string" && typeof nameOrB === "string") {
-    console.log(strOrA);
-    console.log(nameOrB);
-    console.log(age);
-  } else if (typeof strOrA === "number" && typeof nameOrB === "number") {
-    return strOrA + nameOrB;
-  }
-}
-
-console.log(FuncOver(30, 23)); // 53
-
-// this (for safety)
-interface User {
-  id: number;
-  sayMyName: (this: User) => void;
-}
-
-const user: User = {
-  id: 3232,
-  sayMyName: function () {
-    console.log(this.id);
-  },
-};
-
-user.sayMyName();
-
-// index signatures
-interface MyInt {
-  [index: string]: string; --> it say MyInt can not give something like myInt[1] its only myInt.(string)
-  method1: string;
-  method2: string;
-}
-
-const myInt: MyInt = {
-  method1: "lsls",
-  method2: "lsls",
-};
-
-// readOnlyArray
-const myArr: ReadonlyArray<number> = [3, 2, 5, 6, 3];
-myArr[3] = 2; --> Index signature in type 'readonly number[]' only permits reading.ts(2542)
-
-// tuple types یک مفهوم مهم برای کار با آرایه‌هایی است که طول ثابت و ترتیب مشخصی از تایپ های مختلف دارند.
-type MathArr = [number, number, boolean];
-
-function DoMath(mathArr: MathArr): number {
-  const [a, b, isSum] = mathArr;
-  if (isSum) {
-    return a + b;
-  } else {
-    return a - b;
-  }
-}
-console.log(
-  DoMath([5, 3, true]) // returns 8
-);
-
-console.log(
-  DoMath([5, 3, false]) // returns 2
-);
-
-// another example for tuple array
-type StringNumberBooleans = [string, number, ...boolean[]];
-type StringBooleansNumber = [string, ...boolean[], number];
-type BooleansStringNumber = [...boolean[], string, number];
-
-// readonly tuple array
-function doSomething(pair: readonly [string, number]) {
-  // ...
-}
-
-// Utility Types
-interface Todo {
-    title: string;
-    description: string;
-    completed: boolean;
-}
-
-type PartialTodo = Partial<Todo>;
-// { title?: string; description?: string; completed?: boolean; }
-
-type ReadonlyTodo = Readonly<Todo>;
-// { readonly title: string; readonly description: string; readonly completed: boolean; }
-
-type TodoPreview = Pick<Todo, "title" | "completed">;
-// { title: string; completed: boolean; }
-
-type NoDescriptionTodo = Omit<Todo, "description">;
-// { title: string; completed: boolean; }
-
-// as const
-let x = "hello"; // type: string
-const y = "world"; // type: "world" (literal type)
-const z = { a: 1, b: "test" }; // type: { a: number; b: string; }
-const w = { a: 1, b: "test" } as const; // type: { readonly a: 1; readonly b: "test"; }
+// const strings = ["omid", "ONE", "TWO", "THREE"];
+// const sum = strings.reduce((acc, curr) => {
+//   return acc + " " + curr; // omid ONE TWO THREE
+// }, "");
 
 
-// typeof and ReturnType
-type concatType = (a: string, b: string) => string;
+/*** FUNCTION TYPE EXPRESSIONS ***/
+// type FuncType = (a: string) => void;
+// function secondFunc(func: FuncType, p1: string) {
+//   func(p1);
+// }
+// function saySomething(a: string) {
+//   console.log("hello there " + a); // hello there SOMETHING
+// }
+// secondFunc(saySomething, "SOMETHING");
 
-function concatFunc(a: string, b: string): string {
-  return a + b;
-}
 
-type returnType1 = ReturnType<concatType>; // returnType1 is string
-type returnType2 = ReturnType<typeof concatFunc>; // returnType2 is string
+/*** FUNCTION OVERLOAD ***/
+// making one function for different situations
+// function FuncOver(str: string, name: string, age: number): string;
+// function FuncOver(a: number, b: number): number;
+// function FuncOver(
+//   strOrA: string | number,
+//   nameOrB: string | number,
+//   age?: number
+// ): string | number {
+//   if (
+//     typeof strOrA === "string" &&
+//     typeof nameOrB === "string" &&
+//     typeof age === "number"
+//   ) {
+//     return strOrA + " " + nameOrB + " " + age || "20";
+//   } else if (typeof strOrA === "number" && typeof nameOrB === "number") {
+//     return strOrA + nameOrB;
+//   }
 
+//   // in overload function is good idea for using error handling
+//   throw new Error("invalided arguments");
+// }
+// console.log(FuncOver(30, 23)); // 53
+// console.log(FuncOver("one", "two", 3)); // one two 3
+
+
+/*** SETTING TYPE FOR `THIS` ***/
+// interface User {
+//   id: number;
+//   sayMyName: (this: User) => void;
+// }
+// const user: User = {
+//   id: 1234,
+//   sayMyName: function () {
+//     console.log(this.id);
+//   },
+// };
+// user.sayMyName(); // 1234
+
+
+/*** INDEX SIGNATURES ***/
+// interface MyInt {
+//   [index: string]: string; // it say MyInt can not give something like myInt[1] its only myInt.(string)
+//   method1: string;
+//   method2: string;
+// }
+// const myInt: MyInt = {
+//   method1: "lsls",
+//   method2: "lsls",
+// };
+
+
+/*** READONLYARRAY ***/
+// const myArr: ReadonlyArray<number> = [3, 2, 5, 6, 3];
+// myArr[3] = 2; // Index signature in type 'readonly number[]' only permits reading.ts(2542)
+
+
+/*** TUPLE TYPES ***/
+// Tuple types are an important concept for working with arrays that have a fixed length and a specific order of different types.type MathArr = [number, number, boolean];
+// type MathArr = [number, number, boolean];
+// function DoMath(mathArr: MathArr): number {
+//   const [a, b, isSum] = mathArr;
+//   if (isSum) {
+//     return a + b;
+//   } else {
+//     return a - b;
+//   }
+// }
+// console.log(
+//   DoMath([5, 3, true]) // 8
+// );
+// console.log(
+//   DoMath([5, 3, false]) // 2
+// );
+
+
+/*** TUPLE ARRAY AND REST(...) ***/
+// type StringNumberBooleans = [string, number, ...boolean[]];
+// type StringBooleansNumber = [string, ...boolean[], number];
+// type BooleansStringNumber = [...boolean[], string, number];
+
+
+/*** READONLY TUPLE ARRAY ***/
+// function doSomething(pair: readonly [string, number]) {
+// }
+
+
+/*** UTILITY TYPES ***/
+// interface Todo {
+//     title: string;
+//     description: string;
+//     completed: boolean;
+// }
+// type PartialTodo = Partial<Todo>; // { title?: string; description?: string; completed?: boolean; }
+// type ReadonlyTodo = Readonly<Todo>; // { readonly title: string; readonly description: string; readonly completed: boolean; }
+// type TodoPreview = Pick<Todo, "title" | "completed">; // { title: string; completed: boolean; }
+// type NoDescriptionTodo = Omit<Todo, "description">; // { title: string; completed: boolean; }
+
+
+/*** RETURNTYPE ***/
+// type concatType = (a: string, b: string) => string;
+// function concatFunc(a: string, b: string): string {
+//   return a + b;
+// }
+// // return type from a type
+// type returnType1 = ReturnType<concatType>; // returnType1 is string
+// // return type from a function
+// type returnType2 = ReturnType<typeof concatFunc>; // returnType2 is string
+
+/*** INDEXED ACCESS TYPES ***/
 // indexed access types and some horrible things (https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-type Person = { age: number; name: string; alive: boolean };
-type Age = Person["age"]; // type Age = number
-type I1 = Person["age" | "name"]; // type I1 = string | number
-type I2 = Person[keyof Person]; // type I2 = string | number | boolean
-type AliveOrName = "alive" | "name";
-type I3 = Person[AliveOrName]; // type I3 = string | boolean
+// type Person = { age: number; name: string; alive: boolean };
+// type Age = Person["age"]; // type Age = number
+// type I1 = Person["age" | "name"]; // type I1 = string | number
+// type I2 = Person[keyof Person]; // type I2 = string | number | boolean
+// type AliveOrName = "alive" | "name";
+// type I3 = Person[AliveOrName]; // type I3 = string | boolean
 
-// conditional type
-type NameOrId<T extends number | string> = T extends number
-  ? IdLabel
-  : NameLabel;
-  function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
-  throw "unimplemented";
-}
-type Flatten<T> = T extends any[] ? T[number] : T;
- 
-// Extracts out the element type.
-type Str = Flatten<string[]>; // type Str = string
- 
-// Leaves the type alone.
-type Num = Flatten<number>; // type Num = number
-
-
-
-// mapped types
-// making a type from another created type
-type First = {
-  one: string;
-  two: boolean;
-  three: () => void;
-};
-// using Property in keyof
-type Second<Type> = {
-  [Property in keyof Type]: boolean
-};
-type newType = Second<First>;
-// type newType = {
-//     one: boolean;
-//     two: boolean;
-//     three: boolean;
+/*** CONDITIONAL TYPE ***/
+// type NameOrId<T extends number | string> = T extends number
+//   ? number[]
+//   : string[];
+// function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
+//   return [idOrName] as NameOrId<T>;
 // }
+// const result1 = createLabel("one"); // ["one"]
+// const result2 = createLabel(30); // [30]
+// *** another example ***
+// type Flatten<T> = T extends any[] ? T[number] : T; 
+// // Extracts out the element type.
+// type Str = Flatten<string[]>; // type Str = string
+// // Leaves the type alone.
+// type Num = Flatten<number>; // type Num = number
 
 
-// mapped types removing readonly
-type First = {
-  readonly one: string;
-  readonly two: boolean;
-  three: () => void;
-};
-type Second<Type> = {
-  -readonly [Property in keyof Type]: boolean;
-};
-type newType = Second<First>;
-// type newType = {
-//     one: boolean;
-//     two: boolean;
-//     three: boolean;
-// }
+/*** MAPPED TYPES ***/
+// making a type from another created type (we use `Property in keyof`)
+// type First = {
+//   one: string;
+//   two: boolean;
+//   three: () => void;
+// };
+// type Second<Type> = {
+//   [Property in keyof Type]: boolean
+// };
+// type newType = Second<First>; // {one: boolean; two: boolean; three: boolean;}
 
 
-// mapped types removing optional attr
-type First = {
-  one?: string;
-  two?: boolean;
-  three: () => void;
-};
-type Second<Type> = {
-  [Property in keyof Type]-?: boolean;
-};
-type newType = Second<First>;
-// type newType = {
-//     one: boolean;
-//     two: boolean;
-//     three: boolean;
-// }
+/*** MAPPED TYPES REMVOING READONLY ***/
+// type First = {
+//   readonly one: string;
+//   readonly two: boolean;
+//   three: () => void;
+// };
+// type Second<Type> = {
+//   -readonly [Property in keyof Type]: boolean;
+// };
+// type newType = Second<First>; // {one: boolean; two: boolean; three: boolean;}
 
 
-// mapped types remaping with `as`
-type First = {
-  one: string;
-  two: boolean;
-  three: () => void;
-};
-type Second<Type> = {
-  [Property in keyof Type as `newName${Capitalize<string & Property>}`]: Type[Property];
-};
-type newType = Second<First>;
-// type newType = {
-//     newNameOne: string;
-//     newNameTwo: boolean;
-//     newNameThree: () => void;
-// }
+/*** MAPPED TYPES REMVOING OPTIONAL ATTR ***/
+// type First = {
+//   one?: string;
+//   two?: boolean;
+//   three: () => void;
+// };
+// type Second<Type> = {
+//   [Property in keyof Type]-?: boolean;
+// };
+// type newType = Second<First>; // {one: boolean; two: boolean; three: boolean;}
 
 
-// mapped types with filtering
-type First = {
-  one: string;
-  two: boolean;
-  three: () => void;
-};
-type Second<Type> = {
-  [Property in keyof Type as Exclude<Property, "one">]: Type[Property];
-};
-type newType = Second<First>;
-// type newType = {
-//     two: boolean;
-//     three: () => void;
-// }
+/*** MAPPED TYPES REMAPING WITH `AS` ***/
+// we can rename properties dynamicly
+// type First = {
+//   one: string;
+//   two: boolean;
+//   three: () => void;
+// };
+// type Second<Type> = {
+//   [Property in keyof Type as `newName${Capitalize<string & Property>}`]: Type[Property];
+// };
+// type newType = Second<First>; // {newNameOne: string; newNameTwo: boolean; newNameThree: () => void;}
 
 
-// mapped types with accessing to members
-type First = {
-  one: "something";
-  two: boolean;
-};
-type Second<Type extends { one: string; two: boolean }> = {
-  [Property in keyof Type as Type["one"]]: Type["two"];
-};
-type newType = Second<First>;
-// type newType = {
-//     something: boolean;
-// }
+/*** MAPPED TYPES WITH FILTERING ***/
+// type First = {
+//   one: string;
+//   two: boolean;
+//   three: () => void;
+// };
+// type Second<Type> = {
+//   [Property in keyof Type as Exclude<Property, "one">]: Type[Property];
+// };
+// type newType = Second<First>; // {two: boolean; three: () => void;}
 
 
-// template literal types
-type first = "one" | "two";
-type second = "three" | "four";
+/*** MAPPED TYPES WITH ACCESSING TO MEMBERS ***/
+// type First = {
+//   one: "something";
+//   two: boolean;
+// };
+// type Second<Type extends { one: string; two: boolean }> = {
+//   [Property in keyof Type as Type["one"]]: Type["two"];
+// };
+// type newType = Second<First>; // {something: boolean;}
 
-type newType = `${first}_${second}`;
-// type newType = "one_three" | "one_four" | "two_three" | "two_four"
-type newnewType = `${"1" | "2"}__${newType}`;
-// type newnewType = "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
 
-// Intrinsic String Manipulation Types
-type Greeting = "Hello, world"
-type ShoutyGreeting = Uppercase<Greeting>
-// type ShoutyGreeting = "HELLO, WORLD"
-type QuietGreeting = Lowercase<Greeting>
-// type QuietGreeting = "hello, world"
-type LowercaseGreeting = "hello, world";
-type capGreeting = Capitalize<LowercaseGreeting>;
-// type capGreeting = "Hello, world"
-type UppercaseGreeting = "HELLO WORLD";
-type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>; 
-// type UncomfortableGreeting = "hELLO WORLD"
+/*** TEMPLATE LITERAL TYPES ***/
+// type first = "one" | "two";
+// type second = "three" | "four";
+// type newType = `${first}_${second}`; // "one_three" | "one_four" | "two_three" | "two_four"
+// type newnewType = `${"1" | "2"}__${newType}`; // "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
+
+
+/*** INTRINSIC STRING MANIPULATION TYPES ***/
+// type Greeting = "Hello, world"
+// type ShoutyGreeting = Uppercase<Greeting> // "HELLO, WORLD"
+// type QuietGreeting = Lowercase<Greeting> // "hello, world"
+// type LowercaseGreeting = "hello, world";
+// type capGreeting = Capitalize<LowercaseGreeting>; // "Hello, world"
+// type UppercaseGreeting = "HELLO WORLD";
+// type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>; // "hELLO WORLD"
