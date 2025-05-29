@@ -639,3 +639,240 @@
 // type capGreeting = Capitalize<LowercaseGreeting>; // "Hello, world"
 // type UppercaseGreeting = "HELLO WORLD";
 // type UncomfortableGreeting = Uncapitalize<UppercaseGreeting>; // "hELLO WORLD"
+
+
+/*** READONLY IN CLASSES ***/
+// we can setting value with contructor in classes for readonly properties
+// class Point {
+//   readonly x: number = 2;
+//   y: number = 4;
+//   constructor(xVal?: number, yVal?: number) {
+//     if (xVal !== undefined) {
+//       this.x = xVal;
+//     }
+//     if (yVal !== undefined) {
+//       this.y = yVal;
+//     }
+//   }
+// }
+// const pt = new Point(5, 5); // Point {x: 5, y: 5}
+// pt.y = 20; // Point {x: 5, y: 20}
+
+
+/*** CONSTRUCTOR OVERLOADS ***/
+// class Point {
+//   x: number = 2;
+//   y: number = 4;
+//   constructor(x: number, y: number);
+//   constructor(x: string, y: string);
+//   constructor(x: number | string, y: number | string) {
+//     if (typeof x === "number" && typeof y === "number") {
+//       this.x = x;
+//       this.y = y;
+//     } else if (typeof x === "string" && typeof y === "string") {
+//       this.x = Number(x);
+//       this.y = Number(y);
+//     }
+//   }
+// }
+// const pt1 = new Point(5, 5); // Point {x: 5, y: 5}
+// const pt2 = new Point("353", "25"); // Point {x: 353, y: 25}
+
+
+/*** SUPER IS NECESSARY ***/
+// class Father {
+//   a = 5;
+// }
+// class Child extends Father {
+//   b = 5;
+//   constructor(newA: number, newB: number) {
+//     super();
+//     this.b = newB;
+//     this.a = newA;
+//   }
+// }
+
+
+/*** GETTER AND SETTER IN TS ***/
+// TypeScript has some special inference rules for accessors
+// ==> If get exists but no set, the property is automatically readonly
+// ==> If the type of the setter parameter is not specified, it is inferred from the return type of the getter
+// class C {
+//   _length = 0;
+//   get length() {
+//     return this._length;
+//   }
+//   set length(value) {
+//     this._length = value;
+//   }
+// }
+
+
+/*** IMPLEMENTS ***/
+// The implements keyword in TypeScript enforces that a class adheres to a specific interface's contract, 
+// ensuring it provides all required properties and methods, and it will throw a compile-time error if the contract is not met.
+// interface Person {
+//   name: string;
+//   age: number;
+// }
+// class Engineer implements Person {
+//   name = "randomName";
+//   age: number;
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+
+/*** PUBLIC-PROTECTED-PRIVATE ***/
+// PUBLIC: accessing from (inside the creator class ---- subclasses ---- out of classes)
+// PROTECTED: accessing from (insde the creator class ---- subclasses)
+// PRIVATE: accessing from (inside the creator class)
+
+
+/*** STATICS***/
+// creating methods and properties for own class not for samples
+// class MyClass {
+//   static x = 10;
+//   static printX() {
+//     console.log(MyClass.x);
+//   }
+// }
+// MyClass.printX() // 10
+// statics have access modifiers
+// statics have inheritance
+// class MyClass {
+//   static x = 10;
+//   static printX() {
+//     console.log(MyClass.x);
+//   }
+// }
+// class SecondClass extends MyClass {}
+// SecondClass.printX(); // 10
+
+
+/*** RETURN `THIS` IN CLASS ***/
+// class Box {
+//   contents: string = "";
+//   set(value: string) {
+//     this.contents = value;
+//     return this;
+//   }
+// }
+// class ClearableBox extends Box {
+//   clear() {
+//     this.contents = "";
+//   }
+// }
+// const a = new ClearableBox();
+// const b = a.set("hello"); // ClearableBox {contents: 'hello'}
+// b.clear(); // ClearableBox {contents: ''}
+
+
+/*** `THIS` AS PARAMETER ***/
+// class Box {
+//   content: string = "";
+//   constructor(content: string) {
+//     this.content = content;
+//   }
+//   sameAs(other: this) {
+//     // other: this check that we can other get other classes that are Box
+//     return other.content === this.content;
+//   }
+// }
+// class DerivedBox extends Box {
+//   otherContent: string = "?";
+// }
+// const base = new Box("one");
+// const derived1 = new Box("one");
+// const derived2 = new DerivedBox("one");
+// derived1.sameAs(base); // true
+// derived2.sameAs(base); // error: Argument of type 'Box' is not assignable to parameter of type 'DerivedBox'.
+
+
+/*** THIS - BASED TYPE GUARDS ***/
+// may be next time
+// https://www.typescriptlang.org/docs/handbook/2/classes.html#this-based-type-guards
+
+
+/*** PARAMETER PROPERTIES  ***/
+// TypeScript offers special syntax for turning a constructor parameter into a class property with the same name and value. 
+// public, private, protected, or readonly
+// class Params {
+//   constructor(public x: number, protected y: number, private z: string) {}
+// }
+// const param = new Params(1, 2, "three"); // {x: 1, y: 2, z: 'three'}
+
+
+/*** CLASS EXPRESSIONS ***/
+// Class expressions are very similar to class declarations.
+// const myClass = class {
+//   value: number;
+//   constructor(value: number) {
+//     this.value = value;
+//   }
+// };
+// const m = new myClass(3); // myClass {value: 3}
+
+
+/*** INSTANCETYPE ***/
+// EXTRACTS THE TYPE OF AN INSTANCE FROM A CONSTRUCTOR TYPE
+// class Point {
+//   createdAt: number;
+//   x: number;
+//   y: number;
+//   constructor(x: number, y: number) {
+//     this.createdAt = Date.now();
+//     this.x = x;
+//     this.y = y;
+//   }
+// }
+// type PointInstance = InstanceType<typeof Point>; // { createdAt: number; x: number; y: number; }
+// another example
+// class MyClass {
+//   constructor(public value1: number, public value2: string) {}
+// }
+// type myIns = InstanceType<typeof MyClass>;
+// const myVal: myIns = {
+//   value1: 32,
+//   value2: "ss",
+// };
+
+
+/*** ABSTRACT CLASSES ***/
+// An abstract class is like an incomplete blueprint; you can't build a structure directly from it,
+// but it guides the construction of other buildings that must fill in the blueprint's missing pieces.
+// abstract class Base {
+//   abstract getVal(): number;
+//   printVal() {
+//     console.log(this.getVal());
+//   }
+// }
+// class MainClass extends Base {
+//   getVal(): number {
+//     return 10;
+//   }
+// }
+// const myClass = new MainClass();
+// myClass.printVal(); // 10
+
+
+/*** STRUCTURAL TYPING ***/
+// class Point1 {
+//   x = 0;
+//   y = 0;
+// }
+// class Point2 {
+//   x = 0;
+//   y = 0;
+//   z = 0;
+// }
+// const p: Point1 = new Point2(); // ok
+// another test
+// class Point2 {
+//   x = "some random text";
+//   y = 0;
+//   z = 0;
+// }
+// const p: Point1 = new Point2(); // error : Type 'string' is not assignable to type 'number'.
