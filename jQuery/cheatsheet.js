@@ -1,5 +1,6 @@
 // https://learn.jquery.com/
-// ######################### core ######################### //
+/* ######################### CORE ######################### */
+
 
 /*** .READY() ***/
 // first jquery detects that state is ready or not with this
@@ -264,10 +265,10 @@
 // we can add some data to any element this data will be store in selected element like this
 // $(".element").data("id", "392059037209382");
 // you can give the value like this it will return "392059037209382"
-// $(".element").data("id"); 
+// $(".element").data("id");
 
 
-/*** $(this) ***/
+/*** $(THIS) ***/
 // we can get the clicked element as jquery obj with $(this) and function(){}
 // $(".container").click(function(){
 // const $this = $(this);
@@ -355,11 +356,7 @@
 // $(".container div").index() // 0
 
 
-
-
-// ######################### event ######################### //
-
-
+/* ######################### EVENT ######################### */
 
 
 /*** .CLICK ***/
@@ -445,17 +442,17 @@
 // }
 
 
-/*** .BIND() {deprecated} ***/
+/*** .BIND() {DEPRECATED} ***/
 // bind is the same with on but it is better to using on
 // $(".element").bind("click", myFunc)
 
 
-/*** .LIVE() {deprecated} ***/
+/*** .LIVE() {DEPRECATED} ***/
 // live is the same with on but it is better to using on
 // $(".element").live("click", myFunc)
 
 
-/*** .DELEGATE() {deprecated} ***/
+/*** .DELEGATE() {DEPRECATED} ***/
 // delegate is the other way for connecting elements to webpage but we have a very big different here
 // my by i have 100 element with the class of box but i am giving this event to the element which they have
 // .box__container in their parent
@@ -482,8 +479,7 @@
 // this event works for all types of events
 
 
-//#####// SPECIAL EVENTS //#####//
-
+/*** SPECIAL EVENTS ***/
 // blur // focusing out on an input
 // click // having event with clicking elements
 // focus // clicking on an input
@@ -496,8 +492,10 @@
 // ready // when the page is ready this function will play
 
 
-// ######################### effect ######################### //
-// .HIDE()
+/* ######################### EFFECT ######################### */
+
+
+/*** .HIDE() ***/
 // it will give d-none to elements
 // $(".element").hide();
 // we can pass three things for its parameter the first is "slow" that element will scale(0) slowly
@@ -508,7 +506,7 @@
 // $(".element").hide(500) // in half of second
 
 
-// .SHOW()
+/*** .SHOW() ***/
 // it will give back d-none from elements
 // $(".element").show();
 // we can pass three things for its parameter the first is "slow" that element will scale(1) slowly
@@ -519,51 +517,51 @@
 // $(".element").show(500) // in half of second
 
 
-// .SLIDEUP()
+/*** .SLIDEUP() ***/
 // we can give d-none to element with scaleY(0) animation
 // $(".element").slideUp()
 // we can pass for parameter "fast", "slow", "normal", "number in millisecond" like
 // $(".element").slideUp(500) // in half of second
 
 
-// .SLIDEDOWN()
+/*** .SLIDEDOWN() ***/
 // we can give back d-none from element with scaleY(1) animation
 // $(".element").slideDown()
 // we can pass for parameter "fast", "slow", "normal", "number in millisecond" like
 // $(".element").slideDown(500) // in half of second
 
 
-// .SLIDETOGGLE() 
+/*** .SLIDETOGGLE() ***/
 // if the element is slideUp it will play slideDown
 // if the element is slideDown it will play slideUp
 // like the other toggles
 
 
-// .FADEOUT()
+/*** .FADEOUT() ***/
 // if we want to hide element with opacity(0)
 // we can use fadeOut() we can pass "fast", "normal", "slow", "number in millisecond" as its parameter
 // $(".element").fadeOut(1000) // give opacity(0) in 1 second
 
 
-// .FADEIN()
+/*** .FADEIN() ***/
 // if we want to visible element with opacity(1)
 // we can use fadeIn() we can pass "fast", "normal", "slow", "number in millisecond" as its parameter
 // $(".element").fadeIn(1000) // give opacity(1) in 1 second
 
 
-// .FADETOGGlE()
+/*** .FADETOGGLE() ***/
 // if we want to hide and visible element(if its hide make in visible if its visible make it hide)
 // we can use fadeToggle() we can pass "fast", "normal", "slow", "number in millisecond" as its parameter
 // $(".element").fadeToggle(1000) // if its hide give opacity(1) in 1 second OR if its visible give opacity(0) in 1 second
 
 
-// .TOGGLE()
+/*** .TOGGLE() ***/
 // we can use an animation something between slide and fade effects
 // we can use toggle() we can pass "fast", "normal", "slow", "number in millisecond" as its parameter
 // $(".elements").toggle(1500) // if its active it make it inactive and if its inactive it make it active
 
 
-// DOING SOMETHING AFTER ENDING ANIMATION
+/*** DOING SOMETHING AFTER ENDING ANIMATION ***/
 // it is not important that which of these effect is used
 // we can do this method in all these situations
 // $(".element").onOFEffects(500, function() {
@@ -571,7 +569,7 @@
 // })
 
 
-// .STOP()
+/*** .STOP() ***/
 // we can stop an animation with this
 // it will stop all the animation in page
 // $(".element").click(function(){
@@ -580,13 +578,13 @@
 // stop(true, true); // the first true is for clearing the queue and the second true is for finishing the current animation
 
 
-// .DELAY()
+/*** .DELAY() ***/
 // it will help us for having delay between effects
 // we have to pass a parameter like a number with millisecond
 // $(".element").hide(500).delay(1500).show(500);
 
 
-// .ANIMATE()
+/*** .ANIMATE() ***/
 // we can use .animate for having some simple animations in this situation the structure should be like this
 // $(".element").on("click", function() {
 //     $(".element").animate(
@@ -603,7 +601,7 @@
 // })
 
 
-// .QUEUE()
+/*** .QUEUE() ***/
 // in animations we could pass a function after duration for callback but .queue is here for helping us
 // the function which we pass is for the time that the animation has ended
 // $(".element").on("click", function() {
@@ -617,5 +615,3 @@
 //     })
 // })
 // we have some useless and professorial thing about queue here //##https://learn.jquery.com/effects/queue-and-dequeue-explained/
-
-
