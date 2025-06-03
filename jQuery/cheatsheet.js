@@ -189,20 +189,20 @@
 // <div class="grandparent">
 //    <div class="parent">
 //        <div class="child">
-//            <span class="subChild"></span>
+//            <span class="sub-child"></span>
 //        </div>
 //    </div>
 // </div>
 // Selecting an element's direct parent:
-// $( "span.subChild" ).parent(); // returns [ div.child ]
+// $( "span.sub-child" ).parent(); // returns [ div.child ]
 // Selecting all the parents of an element that match a given selector:
-// $( "span.subChild" ).parents( "div.parent" ); // returns [ div.parent ]
-// $( "span.subChild" ).parents(); // returns [ div.child, div.parent, div.grandparent ]
+// $( "span.sub-child" ).parents( "div.parent" ); // returns [ div.parent ]
+// $( "span.sub-child" ).parents(); // returns [ div.child, div.parent, div.grandparent ]
 // Selecting all the parents of an element up to, but *not including* the selector:
-// $( "span.subChild" ).parentsUntil( "div.grandparent" ); // returns [ div.child, div.parent ]
+// $( "span.sub-child" ).parentsUntil( "div.grandparent" ); // returns [ div.child, div.parent ]
 // Selecting the closest parent, note that only one PARENT(NOT CHILD) will be selected
 // and that the initial element itself is included in the search: 
-// $( "span.subChild" ).closest( "div" ); // returns [ div.child ]
+// $( "span.sub-child" ).closest( "div" ); // returns [ div.child ]
 // $( "div.child" ).closest( "div" ); // returns [ div.child ] as the selector is also included in the search:
 
 
