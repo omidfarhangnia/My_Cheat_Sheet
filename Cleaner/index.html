@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea id="textArea"></textarea>
+    <button id="btn">clear</button>
+    <script>
+      function findHeaderIndex(text) {
+        let allHeaderIndexes = [];
+        for (let i = 0; i < text.length; i++) {
+          if (text[i] === "/" && text[i + 1] === "*") {
+            allHeaderIndexes.push(i);
+          }
+        }
+
+        return allHeaderIndexes;
+      }
+
+      function clearText(text) {
+        if (!text) return;
+
+        let stringText = String(text).trim();
+
+        let allHeaderIndexes = findHeaderIndex(stringText);
+
+        for (let i = 0; i < allHeaderIndexes.length; i++) {
+          const theOtherPartOfStr = stringText.slice(
+            allHeaderIndexes[i],
+            stringText.length
+          );
+          const headerText = theOtherPartOfStr.slice(
+            0,
+            theOtherPartOfStr.indexOf("*/") + 2
+          );
+          stringText = stringText.replace(
+            headerText,
+            headerText.toUpperCase().replace(/\s+/g, " ")
+          );
+        }
+
+        for (let i = 0; i < allHeaderIndexes.length; i++) {
+          const nextPrag =
+            i === allHeaderIndexes.length - 1
+              ? stringText.length
+              : allHeaderIndexes[i + 1];
+          const selectedParg =
+            stringText
+              .slice(allHeaderIndexes[i], nextPrag)
+              .trim()
+              .replace(/\n+/g, "\n") +
+            (i === allHeaderIndexes.length - 1 ? "" : "\n\n\n");
+          stringText =
+            stringText.slice(0, allHeaderIndexes[i]) +
+            selectedParg +
+            stringText.slice(nextPrag, stringText.length);
+          allHeaderIndexes = findHeaderIndex(stringText);
+        }
+
+        console.log(stringText);
+        return stringText;
+      }
+
+      const btn = document.querySelector("#btn");
+      const textarea = document.querySelector("#textArea");
+      btn.addEventListener("click", () => {
+        navigator.clipboard.writeText(clearText(textarea.value))
+      });
+    </script>
+  </body>
+</html>
