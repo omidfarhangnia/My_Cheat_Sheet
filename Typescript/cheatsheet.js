@@ -1,5 +1,5 @@
 // https://www.typescriptlang.org/docs/handbook/intro.html
-// ######################### handbook ######################### //
+/* ######################### HANDBOOK ######################### */
 
 
 /*** INTERFACE ***/
@@ -177,7 +177,7 @@
 //   x: number;
 //   y: number;
 // };
- 
+
 
 /*** TYPE ALIASES VS INTERFACE ***/
 // different and similarities between type and interface
@@ -368,7 +368,7 @@
 // }
 // the function says: pet is fish return the final resulf of our test
 // function isFish(pet: Fish | Bird): pet is Fish {
-//   // "pet as fish" is a temporary access for swim method for checking our test
+//   // `pet as fish` is a temporary access for swim method for checking our test
 //   return (pet as Fish).swim !== undefined;
 // }
 // function checkAnimal(pet: Fish | Bird) {
@@ -434,7 +434,6 @@
 //   } else if (typeof strOrA === "number" && typeof nameOrB === "number") {
 //     return strOrA + nameOrB;
 //   }
-
 //   // in overload function is good idea for using error handling
 //   throw new Error("invalided arguments");
 // }
@@ -442,7 +441,7 @@
 // console.log(FuncOver("one", "two", 3)); // one two 3
 
 
-/*** SETTING TYPE FOR "THIS" ***/
+/*** SETTING TYPE FOR `THIS` ***/
 // interface User {
 //   id: number;
 //   sayMyName: (this: User) => void;
@@ -525,6 +524,7 @@
 // // return type from a function
 // type returnType2 = ReturnType<typeof concatFunc>; // returnType2 is string
 
+
 /*** INDEXED ACCESS TYPES ***/
 // indexed access types and some horrible things (https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 // type Person = { age: number; name: string; alive: boolean };
@@ -533,6 +533,7 @@
 // type I2 = Person[keyof Person]; // type I2 = string | number | boolean
 // type AliveOrName = "alive" | "name";
 // type I3 = Person[AliveOrName]; // type I3 = string | boolean
+
 
 /*** CONDITIONAL TYPE ***/
 // type NameOrId<T extends number | string> = T extends number
@@ -552,7 +553,7 @@
 
 
 /*** MAPPED TYPES ***/
-// making a type from another created type (we use "Property in keyof")
+// making a type from another created type (we use `Property in keyof`)
 // type First = {
 //   one: string;
 //   two: boolean;
@@ -588,7 +589,7 @@
 // type newType = Second<First>; // {one: boolean; two: boolean; three: boolean;}
 
 
-/*** MAPPED TYPES REMAPING WITH "AS" ***/
+/*** MAPPED TYPES REMAPING WITH `AS` ***/
 // we can rename properties dynamicly
 // type First = {
 //   one: string;
@@ -596,7 +597,7 @@
 //   three: () => void;
 // };
 // type Second<Type> = {
-//   [Property in keyof Type as "newName${Capitalize<string & Property>}"]: Type[Property];
+//   [Property in keyof Type as `newName${Capitalize<string & Property>}`]: Type[Property];
 // };
 // type newType = Second<First>; // {newNameOne: string; newNameTwo: boolean; newNameThree: () => void;}
 
@@ -627,8 +628,8 @@
 /*** TEMPLATE LITERAL TYPES ***/
 // type first = "one" | "two";
 // type second = "three" | "four";
-// type newType = \`${first}_${second}\`; // "one_three" | "one_four" | "two_three" | "two_four"
-// type newnewType = \`${"1" | "2"}__${newType}\`; // "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
+// type newType = `${first}_${second}`; // "one_three" | "one_four" | "two_three" | "two_four"
+// type newnewType = `${"1" | "2"}__${newType}`; // "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
 
 
 /*** INTRINSIC STRING MANIPULATION TYPES ***/
@@ -752,7 +753,7 @@
 // SecondClass.printX(); // 10
 
 
-/*** RETURN "THIS" IN CLASS ***/
+/*** RETURN `THIS` IN CLASS ***/
 // class Box {
 //   contents: string = "";
 //   set(value: string) {
@@ -770,7 +771,7 @@
 // b.clear(); // ClearableBox {contents: ''}
 
 
-/*** "THIS" AS PARAMETER ***/
+/*** `THIS` AS PARAMETER ***/
 // class Box {
 //   content: string = "";
 //   constructor(content: string) {
@@ -796,7 +797,7 @@
 // https://www.typescriptlang.org/docs/handbook/2/classes.html#this-based-type-guards
 
 
-/*** PARAMETER PROPERTIES  ***/
+/*** PARAMETER PROPERTIES ***/
 // TypeScript offers special syntax for turning a constructor parameter into a class property with the same name and value. 
 // public, private, protected, or readonly
 // class Params {
