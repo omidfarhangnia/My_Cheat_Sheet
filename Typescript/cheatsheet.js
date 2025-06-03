@@ -368,7 +368,7 @@
 // }
 // the function says: pet is fish return the final resulf of our test
 // function isFish(pet: Fish | Bird): pet is Fish {
-//   // `pet as fish` is a temporary access for swim method for checking our test
+//   // "pet as fish" is a temporary access for swim method for checking our test
 //   return (pet as Fish).swim !== undefined;
 // }
 // function checkAnimal(pet: Fish | Bird) {
@@ -442,7 +442,7 @@
 // console.log(FuncOver("one", "two", 3)); // one two 3
 
 
-/*** SETTING TYPE FOR `THIS` ***/
+/*** SETTING TYPE FOR "THIS" ***/
 // interface User {
 //   id: number;
 //   sayMyName: (this: User) => void;
@@ -552,7 +552,7 @@
 
 
 /*** MAPPED TYPES ***/
-// making a type from another created type (we use `Property in keyof`)
+// making a type from another created type (we use "Property in keyof")
 // type First = {
 //   one: string;
 //   two: boolean;
@@ -588,7 +588,7 @@
 // type newType = Second<First>; // {one: boolean; two: boolean; three: boolean;}
 
 
-/*** MAPPED TYPES REMAPING WITH `AS` ***/
+/*** MAPPED TYPES REMAPING WITH "AS" ***/
 // we can rename properties dynamicly
 // type First = {
 //   one: string;
@@ -596,7 +596,7 @@
 //   three: () => void;
 // };
 // type Second<Type> = {
-//   [Property in keyof Type as `newName${Capitalize<string & Property>}`]: Type[Property];
+//   [Property in keyof Type as "newName${Capitalize<string & Property>}"]: Type[Property];
 // };
 // type newType = Second<First>; // {newNameOne: string; newNameTwo: boolean; newNameThree: () => void;}
 
@@ -627,8 +627,8 @@
 /*** TEMPLATE LITERAL TYPES ***/
 // type first = "one" | "two";
 // type second = "three" | "four";
-// type newType = `${first}_${second}`; // "one_three" | "one_four" | "two_three" | "two_four"
-// type newnewType = `${"1" | "2"}__${newType}`; // "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
+// type newType = \`${first}_${second}\`; // "one_three" | "one_four" | "two_three" | "two_four"
+// type newnewType = \`${"1" | "2"}__${newType}\`; // "1__one_three" | "1__one_four" | "1__two_three" | "1__two_four" | "2__one_three" | "2__one_four" | "2__two_three" | "2__two_four"
 
 
 /*** INTRINSIC STRING MANIPULATION TYPES ***/
@@ -752,7 +752,7 @@
 // SecondClass.printX(); // 10
 
 
-/*** RETURN `THIS` IN CLASS ***/
+/*** RETURN "THIS" IN CLASS ***/
 // class Box {
 //   contents: string = "";
 //   set(value: string) {
@@ -770,7 +770,7 @@
 // b.clear(); // ClearableBox {contents: ''}
 
 
-/*** `THIS` AS PARAMETER ***/
+/*** "THIS" AS PARAMETER ***/
 // class Box {
 //   content: string = "";
 //   constructor(content: string) {
