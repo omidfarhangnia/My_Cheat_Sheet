@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <script>
+        // what is reguler expression? ==> regular expression is a way for searching throw strings
+
+        var UserIdea = `$
+Lorem cat rat ipsum dolor sit amet cons#@ectetur siit. dooolor consectetur, adipisicing elit. Vitae ab dicta nisi nihil incidunt velit
+dio voluptas iure, TTThe ad inventore maiores, incidunt in corrupti voluptatum, minus necessitatibus modi quas minima. Lorem ipsum
+dolor sit amet consectetur adipisicing elit. Facilis sit illum, The the 45
+the cat the dog the mouse quaerat nisi, dolorum, suscipit aut excepturi amet fugiat voluptate laudantium quas sapiente
+Doloribus voluptatibus est sit quaerat tenetur commodi`
+        console.log(UserIdea)
+        var Test__number__1 = UserIdea.search(/Lorem/g)
+        var Test__number__2 = UserIdea.search(/i+/g)
+        // /x+/g find the word that has x minimum one x like x-ray or more than one x like xxxxx-ray
+        var Test__number__3 = UserIdea.search(/doo?o?/g)
+        // /xy?/g find the word that has xy or x only we are saying that y is optional
+        var Test__number__4 = UserIdea.search(/do*/g)
+        // /xy*/g find the word that has x or xy or xyy or xyyy or ... or d only this is like using mixing ? with + but we can not do the same 
+        // with /xy+?/g this give *******************error************************
+        var Test__number__5 = UserIdea.search(/n.s./g)
+        // /.x/g find everything that is beside x no diffrent what is this maybe lx or mx or ix ... only x does matter its name is wild cart
+        var Test__number__6 = UserIdea.search(/\./g)
+        // /\./g find the . in the text we can not find . with /./g
+        var Test__number__7 = UserIdea.search(/\w/g)
+        // /\w/g find all the letters that we have lowercase or uppercase or numbers but can not select . , * # @ % these special symbols
+        var Test__number__8 = UserIdea.search(/\S/g)
+        // /\S/g we can find all the numbers and letters and symbols but not the white spaces
+        var Test__number__9 = UserIdea.search(/\s/g)
+        // /\s/g find all the white spaces that we have
+        var Test__number__10 = UserIdea.search(/\w{10,}/g)
+        // \W != \w
+        // /\w{10,}/g find all the letters or numbers that have 10 or more length we dont have symbols
+        var Test__number__11 = UserIdea.search(/\S{10,}/g)
+        // /\S{10,}/g find all the letters or numbers or symbols that have 10 or more length 
+        var Test__number__12 = UserIdea.search(/\S{5,6}/g)
+        // /\w{5,6}/g find all the letters or numbers or symbols that have 5 or 6 length
+        var Test__number__13 = UserIdea.search(/[fcr]a[tl]/g) //(f|c|r|m)a(t|l)
+        // /[fcr]a[tl]/g find all these words cat , cal , fat , fal , rat , ral;
+        var Test__number__14 = UserIdea.search(/[a-zA-Z]a/g)
+        // /[a-zA-Z]a/g find all the words that start with a to z or A to Z and after have a like  aa ba ... Aa Ba ...
+        var Test__number__15 = UserIdea.search(/[0-9][0-9]/g)
+        // /[0-9][0-9]/g find all the numbers that are between 00 to 99 like 01,02,03,04,05 ... 96,97,98,99
+        var Test__number__16 = UserIdea.match(/(t|T)he/g)
+        // /(t|T)he/g we can use groups we can find all the the or The words 
+        var Test__number__17 = UserIdea.match(/(t|T){1,3}he/g)
+        // /(t|T){1,3}he/g find all the the , tthe , ttthe , The , TThe , TTThe that we have in the text )))>>>> /(t|T){1,3}he/g == /[tT]{1,3}he/g
+        // tips********* when we are using groups like (t|T){1,2} the meaning is t,T,tt,TT 
+        // but if we remove | like (tT){1,2} the meaning is tT,tTtT
+        // tipes what is diffrent between using [abc] or (abc) in the first case a and b and c are single prameters
+        // we cant select the abc word for our paremeter but we can select words with ()
+        var Test__number__18 = UserIdea.match(/^([a-z]|[A-Z])[a-zA-Z]*/gm)
+        // /^([a-z]|[A-Z])[a-zA-Z]*/gm at first i use gm that means global and multilines and i used ^ that means only the the new lines and
+        // i use ([a-z]|[A-Z]) it means all the letters only letters and after i said [a-zA-Z]* write it until the end of the word means space 
+        var Test__number__19 = UserIdea.match(/([a-z]|[A-Z]|[0-9])*$/gm)
+        // /\.$/gm we can select the last . that we have them in every multiline. $ sign is for selecting the last thing in every muttiline.
+        var Test__number__20 = UserIdea.match(/(?<=[tT]he).([a-z]|[A-Z])*/g)
+        // we can selecting the next thing after our word which we choose it like this i choose everything that they are after my the or The words
+        var Test__number__21 = UserIdea.match(/\d{2}/g)
+        // /\d{2}/g we can select all the digits with this rule and we are selecting them two by two 
+        var Test__number__22 = UserIdea.match(/\D/g) 
+        // /\D/g we can select all the things that they are not digits /\D/g == /[^\d]/g
+        var Test__number__23 = UserIdea.match(/(?<firstpart>\d)/g)
+        // /(?<firstpart>\d)/g we can naming the groups with using ?<randomtext>
+        // and for using we should say \1
+        var Test__number__24 = UserIdea.search(/\(/g)
+        // we can search ( ) with \ like .
+        var Test__number__25 = UserIdea.search(/\bhe/g);
+        // /\bhe/g find the he that it is at the beggining of the word like hello helena ... not the mahel
+        var Test__number__26 = UserIdea.search(/he\b/g);
+        // /he\b/g find the he that it is at the end of the word like mehe sehe not like hello or mehelo
+        var Test__number__27 = /the/g.test(UserIdea)
+        // we can use test for checking that we have that thing in our string or not
+        var Test__number__28 = /the/g.exec(UserIdea);
+
+        // regext haris hastesh va vaghti migim /(W.*e)/g ta gai ke betone jolo mire ama vaghti migim /(w.*?e)/g nazdik tarin ro entekhab mikone
+        
+        console.log(Test__number__1)
+        console.log(Test__number__2)
+        console.log(Test__number__3)
+        console.log(Test__number__4)
+        console.log(Test__number__5)
+        console.log(Test__number__6)
+        console.log(Test__number__7)
+        console.log(Test__number__8)
+        console.log(Test__number__9)
+        console.log(Test__number__10)
+        console.log(Test__number__11)
+        console.log(Test__number__12)
+        console.log(Test__number__13)
+        console.log(Test__number__14)
+        console.log(Test__number__15)
+        console.log(Test__number__16)
+        console.log(Test__number__17)
+        console.log(Test__number__18)
+        console.log(Test__number__19)
+        console.log(Test__number__20)
+        console.log(Test__number__21)
+        console.log(Test__number__22)
+        console.log(Test__number__23)
+        console.log(Test__number__24)
+        console.log(Test__number__25)
+        console.log(Test__number__26)
+        console.log(Test__number__27)
+        console.log(Test__number__28)
+          
+        var userName =
+`omid -- 16 -- tehran
+amir -- 36 -- tehran
+matin -- 56 -- yazd
+barbod -- 13 -- tehran
+nasrin -- 12 -- tehran
+omid -- 56 -- ghom
+hafez -- 32 -- tehran
+ahamd -- 52 -- tehran
+iman -- 22 -- mashhad
+golab -- 21 -- tehran
+hafez ziz -- 17 -- tehran
+amir shahin -- 26 -- ostan alborz
+nima -- 27 -- tehran
+setayesh -- 135 -- tehran
+abas -- 125 -- khorasan razavi
+ali -- 42 -- tehran
+firoze -- 46 -- tehran
+piroz -- 26 -- tehran
+maryam -- 26 -- behdasht
+iman -- 66 -- tehran
+yazid -- 68 -- tehran
+mohamad -- 56 -- ahdasht
+hasan -- 54 -- tehran
+hosein -- 54 -- tehran
+mahsa -- 54 -- kerman
+javid -- 54 -- tehran
+`
+          var userContainer = [];
+
+          IpMember(userName)
+
+          function IpMember(userName){
+            var userMembersLength = userName.match(/^([a-zA-Z]+)/gm).length;
+            for(var i = 0; i < userMembersLength; i++){
+              var UserData = userName.match(/^([a-zA-Z]+) ?([a-zA-Z]+)? -- (\d+) -- (\w+[ ]?\w+)/gm)[i];
+              userContainer.push(cleanThem(UserData , i));
+            }
+  
+          }
+          
+          function cleanThem(UserData , UserNumber){
+            var UserDataContainer = {
+              UserNumber : UserNumber ,
+              UserName : '',
+              UserAge : '',
+              UserCity : ''
+            };
+            
+            UserDataContainer.UserName = UserData.match(/^([a-zA-Z]+) ?([a-zA-Z]+)?/g)[0].trim();
+            UserDataContainer.UserAge = UserData.match(/(\d+)/g)[0];
+            UserDataContainer.UserCity = UserData.match(/([a-zA-Z]+) ?([a-zA-Z]+)?$/g)[0];
+            return UserDataContainer;
+          }
+
+          console.log(userContainer)
+        </script>
+  </body>
+</html>
