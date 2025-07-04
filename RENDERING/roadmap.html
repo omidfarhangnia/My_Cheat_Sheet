@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <title>نقشه راه یادگیری استراتژی‌های رندر</title>
+    <style>
+      body {
+        font-family: Vazirmatn, sans-serif;
+        line-height: 1.8;
+        direction: rtl;
+        background-color: #f9f9f9;
+        color: #222;
+        padding: 2rem;
+        max-width: 960px;
+        margin: auto;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      ul {
+        list-style-type: disc;
+        margin-right: 1.5rem;
+      }
+      code {
+        background-color: #eee;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+      a {
+        color: #007acc;
+        text-decoration: none;
+      }
+
+      li:has(+ ul a:not([href="#"])) {
+        background-color: #d6d6d6;
+      }
+
+      li + ul:has(a:not([href="#"])) {
+        background-color: #a9a9a9;
+        position: relative;
+      }
+
+      a:not([href="#"])::after {
+        content: "✓";
+        position: absolute;
+        top: -22px;
+        left: 30px;
+        width: 40px;
+        height: 40px;
+        border: solid 2px #000000;
+        border-radius: 50%;
+        text-align: center;
+        align-content: center;
+        color: #000000;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📍 نقشه راه یادگیری استراتژی‌های رندر در وب (کامل‌ترین نسخه ممکن)</h1>
+    <p>
+      <strong>🎯 هدف:</strong> یادگیری پایه‌ای تا پیشرفته مفاهیم مربوط به
+      Rendering Strategies در React و Next.js.
+    </p>
+
+    <h2>🧱 فصل ۱: مفاهیم پایه وب</h2>
+    <ul>
+      <li>HTTP چیست؟</li>
+      <ul>
+        <li>
+          <a
+            target="_blank"
+            href="https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/"
+            >learning source</a
+          >
+        </li>
+      </ul>
+      <li>
+        مرورگر چگونه کار می‌کند؟<br />مرورگر چگونه یک صفحه را رندر می‌کند؟
+      </li>
+      <ul>
+        <li>
+          <a
+            target="_blank"
+            href="https://www.browserstack.com/guide/what-is-browser"
+            >learning source</a
+          >
+        </li>
+      </ul>
+      <li>Request و Response چیستند؟</li>
+      <ul>
+        <li>
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Request%E2%80%93response"
+            >learning source</a
+          >
+        </li>
+      </ul>
+      <li>DNS یعنی چه؟</li>
+      <ul>
+        <li><a target="_blank" href="https://www.cloudflare.com/learning/dns/what-is-dns/">learning source</a></li>
+      </ul>
+      <li>IP یعنی چه؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Hosting یعنی چه؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Server یعنی چه؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>TTFB، FCP، LCP، CLS چیستند؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>چه زمانی صفحه “interactive” می‌شود؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🔧 فصل ۲: مفاهیم پایه رندرینگ</h2>
+    <ul>
+      <li>Rendering چیست؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>DOM، Virtual DOM و React DOM</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Reconciliation در React</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Hydration چیست؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Initial Render vs Re-render vs Reconciliation</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🧭 فصل ۳: استراتژی‌های رندر</h2>
+    <ul>
+      <li>Client-side Rendering (CSR)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Server-side Rendering (SSR)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Static Site Generation (SSG)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Incremental Static Regeneration (ISR)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Streaming / Partial Hydration</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Edge Rendering</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Server Components</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🧠 فصل ۴: مفاهیم مرتبط</h2>
+    <ul>
+      <li>تأثیر نوع رندر بر SEO</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تأثیر نوع رندر بر تجربه کاربر (UX)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تأثیر نوع رندر بر Performance</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Code Splitting و Lazy Loading</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Data Fetching Patterns</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🔍 فصل ۵: مقایسه استراتژی‌ها</h2>
+    <ul>
+      <li>TTFB، FCP و مقایسه سرعت بارگذاری</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>SEO و سئوپذیری</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>هزینه سرور</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>پیچیدگی پیاده‌سازی</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تجربه کاربری</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>جدول نهایی Use Case</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>📦 فصل ۶: فریم‌ورک‌ها و پیاده‌سازی‌ها</h2>
+    <ul>
+      <li>React Router و CSR</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Next.js App Router vs Pages Router</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>getServerSideProps، getStaticProps، fetch در App Router</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مقایسه Fetch در کلاینت و سرور</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>API Routes vs Server Actions</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🛠 فصل ۷: پروژه تمرینی</h2>
+    <p>پروژه پیشنهادی:</p>
+    <ul>
+      <li>صفحه اصلی: SSG</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>صفحه محصول: SSR</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>نظرات: CSR</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>بنر تبلیغاتی: Streaming</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>آپدیت داده: Server Action یا API Route</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+
+    <h1>📚 نقشه راه مفاهیم مکمل برای درک کامل استراتژی‌های رندر در وب</h1>
+    <h2>🧱 فصل ۱: مفاهیم پایه وب و معماری اینترنت</h2>
+
+    <ul>
+      <li>HTTP vs HTTPS</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Request, Response</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Protocols: TCP/IP، UDP</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Port، IP، Domain</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>DNS Resolution چگونه کار می‌کند؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تفاوت Hosting، CDN، Proxy، Load Balancer</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تفاوت Client و Server</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Full-duplex و Keep-Alive در ارتباط‌ها</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم API، REST، GraphQL، RPC</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Latency، Bandwidth، Packet Loss</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🌐 فصل ۲: مرورگر و Rendering Engine</h2>
+    <ul>
+      <li>مرورگر چیست و چطور کار می‌کند؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مراحل از URL تا نمایش صفحه:</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <ul>
+        <li>DNS Resolution</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>TCP Handshake</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>HTTPS handshake</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>ارسال Request و دریافت Response</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>Parsing HTML, CSS</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>ساخت DOM و CSSOM</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>ایجاد Render Tree</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+        <li>Layout، Paint، Composite</li>
+        <ul>
+          <li><a target="_blank" href="#">learning source</a></li>
+        </ul>
+      </ul>
+      <li>موتورهای مرورگر (Chrome: Blink، Firefox: Gecko)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>User Agent و نقش آن</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Critical Rendering Path</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Single-threaded nature of JS</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Event Loop، Call Stack، Microtask vs Macrotask Queue</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Web Workers, Service Workers</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🔧 فصل ۳: امنیت در وب و مرورگر</h2>
+    <ul>
+      <li>Same-Origin Policy</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>CORS چیست و چرا وجود دارد؟</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>CSRF و راه‌های جلوگیری از آن</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>XSS (Cross-site Scripting)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Clickjacking</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>CSP (Content Security Policy)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Token و Secure Cookie</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>HTTPS و گواهی SSL</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🧠 فصل ۴: Performance و تحلیل آن</h2>
+    <ul>
+      <li>Core Web Vitals: TTFB، FCP، LCP، CLS، INP</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Time to Interactive، Speed Index</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>استفاده از Lighthouse</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>نحوه استفاده از DevTools برای Performance</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Lazy Loading، Code Splitting، Prefetch</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>ETag, Cache-Control</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Long Tasks و تأثیرشان</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Performance Budget</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>📦 فصل ۵: ساختار و معماری برنامه‌های فرانت‌اند</h2>
+    <ul>
+      <li>SPA vs MPA vs Hybrid</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Routing (Client-side و Server-side)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>State Management: Context، Redux، Zustand، Jotai</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Folder structure در پروژه‌های واقعی</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Smart vs Dumb Components</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Design Patterns in React</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Dependency Injection</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Modular Architecture</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>📈 فصل ۶: SEO، Accessibility، UI/UX</h2>
+    <ul>
+      <li>Meta Tags و Open Graph Protocol</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>robots.txt، sitemap.xml</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Server-side vs Client-side Rendering برای SEO</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Semantic HTML</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>ARIA roles و Accessibility Tree</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Focus management</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Color contrast, screen readers</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Mobile First Design</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🔬 فصل ۷: تست‌نویسی در فرانت‌اند</h2>
+    <ul>
+      <li>Unit Test vs Integration Test vs E2E Test</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>ابزارهای تست: Jest، React Testing Library، Cypress، Playwright</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفهوم Mocking</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>تست کردن API و فرم‌ها</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Test Coverage و CI Integration</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+
+    <h2>🛠 فصل ۸: DevOps و ابزارهای توسعه‌دهنده</h2>
+    <ul>
+      <li>Webpack، Vite، Turbopack</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Babel، PostCSS</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Linters (ESLint)، Formatters (Prettier)</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفاهیم CI/CD</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>GitHub Actions، Vercel، Netlify</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفاهیم Build، Deploy، Rollback</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>Docker برای توسعه فرانت‌اند</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+      <li>مفاهیم مربوط به سرور: SSR Caching، ISR Caching</li>
+      <ul>
+        <li><a target="_blank" href="#">learning source</a></li>
+      </ul>
+    </ul>
+  </body>
+</html>
