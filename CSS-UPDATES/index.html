@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- css nesting -->
+    <div class="container css-nesting">
+      <p class="container--prag">one</p>
+      <p class="container--prag">two</p>
+      <button class="container--btn">three</button>
+    </div>
+    <!-- css container -->
+    <div class="container css-container">
+      <p class="container--prag">one</p>
+      <p class="container--prag">two</p>
+    </div>
+    <!-- subgrid -->
+    <div class="container css-subgrid">
+      <div class="container__card">
+        <div
+          class="container--div"
+          style="height: 30px; background-color: #800d03"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 40px; background-color: #1fdd9f"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 10px; background-color: #145b26"
+        ></div>
+      </div>
+      <div class="container__card">
+        <div
+          class="container--div"
+          style="height: 30px; background-color: #800d03"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 20px; background-color: #1fdd9f"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 30px; background-color: #145b26"
+        ></div>
+      </div>
+      <div class="container__card">
+        <div
+          class="container--div"
+          style="height: 10px; background-color: #800d03"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 20px; background-color: #1fdd9f"
+        ></div>
+        <div
+          class="container--div"
+          style="height: 50px; background-color: #145b26"
+        ></div>
+      </div>
+    </div>
+    <!-- logical properties -->
+    <div class="container css-logicalProperty">
+      <div class="container__text" dir="ltr">hello there</div>
+      <div class="container__text" dir="rtl">سلام آنجا</div>
+    </div>
+    <!-- has -->
+    <div class="container css-has">
+      <ul class="container__list">
+        <li class="selected"></li>
+      </ul>
+      <ul class="container__list">
+        <li class="not-selected"></li>
+      </ul>
+    </div>
+    <!-- text-wrap-balance -->
+    <div class="container css-balance">
+      <p class="container__prag">
+        balance Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Incidunt distinctio quos doloremque quasi repudiandae facilis sequi
+        consectetur unde, iusto quisquam provident possimus, quae nostrum at!
+        Voluptates asperiores nihil laudantium sint.
+      </p>
+      <p class="container__prag">
+        pretty Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+        distinctio quos doloremque quasi repudiandae facilis sequi consectetur
+        unde, iusto quisquam provident possimus, quae nostrum at! Voluptates
+        asperiores nihil laudantium sint.
+      </p>
+      <p class="container__prag">
+        normal Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt
+        distinctio quos doloremque quasi repudiandae facilis sequi consectetur
+        unde, iusto quisquam provident possimus, quae nostrum at! Voluptates
+        asperiores nihil laudantium sint.
+      </p>
+    </div>
+    <!-- new animation -->
+    <div class="container css-animation">
+        <div class="container__box"></div>
+    </div>
+  </body>
+</html>

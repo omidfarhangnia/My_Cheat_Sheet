@@ -1,0 +1,174 @@
+/* 
+    css layer 
+    ==> @layer reset, base, components, utilities;  
+    ==> reset *
+    ==> base ** (like p, a, ... base style)
+    ==> components *** (big classes like card, button)
+    ==> utilities **** (specefic classes p-4 and single-purpose )
+    ==> styles without layer *****
+    ==> inline styles ******
+    ==> animations and transitions *******
+    ==> !important ******** (highest level)
+*/
+@layer reset {
+  * {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.container {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  &:nth-child(odd) {
+    background: #b8efe2;
+  }
+  &:nth-child(even) {
+    background: #7a78ba;
+  }
+}
+
+/* css nesting */
+.css-nesting {
+  .container--prag {
+    background-color: #201b3e;
+    &:first-child {
+      border: 3px solid black;
+    }
+  }
+
+  .container--btn {
+    background: #ae097d;
+  }
+}
+
+/* css container */
+.css-container {
+  /* container name */
+  container-name: cssContainer;
+  /* 
+    container type (what we are checking to apply changes) 
+    ==> normal (default): can only be queried base on their styles
+    ==> inline-size: can be queried base on its width
+    ==> size: can be queried base on its width and height
+  */
+  container-type: size;
+  height: 50vh;
+  .container--prag {
+    font-size: 30px;
+    &:first-child {
+      background: #aad27b;
+    }
+    &:last-child {
+      background: #4ed184;
+    }
+  }
+}
+
+@container cssContainer (min-width: 600px) {
+  .css-container .container--prag {
+    border: 10px solid black;
+  }
+}
+
+@container cssContainer (height > 400px) {
+  .css-container .container--prag {
+    outline: 10px solid red !important;
+  }
+}
+
+/* css subgrid */
+.css-subgrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 30px;
+
+  .container__card {
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 30px;
+
+    display: grid;
+    gap: 30px;
+    grid-row: 1 / -1;
+    grid-template-rows: subgrid;
+    &:nth-child(1) {
+      grid-column-start: 2;
+    }
+    &:nth-child(2) {
+      grid-column-start: 3;
+    }
+    &:nth-child(3) {
+      grid-column-start: 4;
+    }
+  }
+}
+
+/* css logical property */
+.css-logicalProperty {
+  font-size: 30px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  .container__text {
+    background: #ec87c9;
+    /* it will be different in different languages */
+    padding-inline-start: 30px;
+  }
+}
+
+/* css has */
+.css-has {
+  .container__list {
+    height: 100px;
+    width: 100px;
+    &:has(.selected) {
+      background-color: #16e2ad;
+    }
+    &:not(:has(.selected)) {
+      /* color mix */
+      background-color: color-mix(in srgb, #d8e216 40%, #ba0579 60%);
+    }
+  }
+}
+
+/* css-balance */
+.css-balance {
+  flex-direction: row;
+  .container__prag {
+    width: 30%;
+    &::first-letter {
+      font-size: 40px;
+      text-transform: capitalize;
+    }
+    &:nth-child(1) {
+      text-wrap: balance;
+    }
+    &:nth-child(2) {
+      text-wrap: pretty;
+    }
+  }
+}
+
+/* css animation */
+@keyframes newAnimation {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.css-animation {
+  .container__box {
+    width: 400px;
+    height: 400px;
+    background-color: red;
+    animation: newAnimation auto linear;
+    animation-timeline: scroll(root block);
+  }
+}

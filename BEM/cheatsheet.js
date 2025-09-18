@@ -18,7 +18,7 @@
 /*** ELEMENT ***/
 // an element is a part of a block that has no standalone meaning
 // The element name describes its purpose
-// the structurre is block-name__element-name (double underscore (__))
+// the structure is block-name__element-name (double underscore (__))
 // Elements can be nested inside each other.
 // An element is always part of a block, not another element
 // !!! WE DO NOT USE block__element__sub-element !!!
