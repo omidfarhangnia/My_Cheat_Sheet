@@ -2074,12 +2074,13 @@ function main14() {
 
 //     for (let i = 0; i < vertices.length; i += 3) {
 //       vertexHelper.push(
-//         <Text
-//           children={i / 3}
-//           fontSize={0.5}
-//           position={[vertices[i], vertices[i + 1], vertices[i + 2]]}
-//           material-color="#FF0077"
-//         ></Text>
+//        <>
+//          <Text rotation={[0, Math.PI * (vertices[i + 2] > 0 ? 0 : 1), 0]} position={[vertices[i] * 2, vertices[i + 1], vertices[i + 2] * 2]} children={i / 3} fontSize={0.5} material-color="#FF0077"></Text>
+//          <mesh position={[vertices[i], vertices[i + 1], vertices[i + 2]]}>
+//            <boxGeometry args={[0.05, 0.05, 0.05]}/>
+//            <meshBasicMaterial color={"green"} />
+//          </mesh>
+//        </>
 //       );
 //     }
 
