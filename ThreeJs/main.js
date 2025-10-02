@@ -2028,3 +2028,96 @@ function main14() {
 
 // using iframe for setting style in background
 // more data https://threejs.org/manual/#en/tips#html-background
+
+
+/****************using vertex helper in buffergeometry****************/
+// import * as THREE from "three";
+// import { OrbitControls } from "@react-three/drei";
+// import { Canvas } from "@react-three/fiber";
+// import { useMemo } from "react";
+// import { Text } from "@react-three/drei";
+// function CustomGeometry() {
+//   const { geometry, vertexHelper } = useMemo(() => {
+//     const vertices = new Float32Array([
+//       -3,  3,  3,
+//        3,  3,  3,
+//        3, -3,  3,
+//       -3, -3,  3,
+//       -3,  3, -3,
+//        3,  3, -3,
+//        3, -3, -3,
+//       -3, -3, -3,
+//     ])
+
+//     const indices = new Uint16Array([
+//       0, 2, 1,
+//       0, 3, 2,
+//       0, 1, 4,
+//       4, 3, 0,
+//       4, 1, 5,
+//       1, 2, 5,
+//       6, 5, 2,
+//       2, 3, 6,
+//       4, 5, 6,
+//       3, 7, 6,
+//       7, 3, 4,
+//       4, 6, 7
+//     ])
+
+//     const geom = new THREE.BufferGeometry();
+//     geom.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+//     geom.setIndex(new THREE.BufferAttribute(indices, 1));
+//     geom.computeVertexNormals();
+
+//     // vertex helper
+//     const vertexHelper = [];
+
+//     for (let i = 0; i < vertices.length; i += 3) {
+//       vertexHelper.push(
+//         <Text
+//           children={i / 3}
+//           fontSize={0.5}
+//           position={[vertices[i], vertices[i + 1], vertices[i + 2]]}
+//           material-color="#FF0077"
+//         ></Text>
+//       );
+//     }
+
+//     return { geometry: geom, vertexHelper };
+//   }, []);
+
+//   return (
+//     <group position={[0, 0, 0]}>
+//       <mesh geometry={geometry}>
+//         <meshStandardMaterial color={"blue"} />
+//       </mesh>
+//       <pointLight color={"#ffffff"} intensity={40} position={[0, 4, -4]} />
+//       <pointLight color={"#ffffff"} intensity={40} position={[0, 4, 0]} />
+//       <pointLight color={"#ffffff"} intensity={40} position={[0, -4, -4]} />
+//       <pointLight color={"#ffffff"} intensity={40} position={[0, 4, 0]} />
+//       <pointLight color={"#ffffff"} intensity={40} position={[-4, 0, 4]} />
+//       {vertexHelper}
+//     </group>
+//   );
+// }
+// function Main15() {
+//   return (
+//     <div style={{ width: "100vw", height: "100vh" }}>
+//       <Canvas
+//         camera={{
+//           position: [0, 0, 25],
+//           fov: 75,
+//           near: 0.1,
+//           far: 600,
+//         }}
+//         style={{
+//           background: "#ffffff",
+//         }}
+//       >
+//         <OrbitControls />
+//         <CustomGeometry />
+//       </Canvas>
+//     </div>
+//   );
+// }
+// export default Main15;
