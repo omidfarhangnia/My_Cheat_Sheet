@@ -6,7 +6,9 @@
 // git push ==> it will push all the files to the github page
 // git diff HEAD ==> will show your current page vs old page
 // git diff --staged ==> will show your current page vs old page that we added them in the last time
-// git reset ==> with this rule we can bring out a file from stage 
+// git reset ==> with this rule we can bring out a file from stage
+// git reset --hard HEAD~1 ==> -hard: Resets the working directory and the index to the state of the previous commit
+// git reset --soft HEAD~1 ==> -soft: Resets the index but leaves the working directory unchanged. Your changes will be staged and ready for a new commit
 // git chechout -- index.html ==> when we didn't add it we can using this for coming back to the base
 // git branch ==> we can give the name of branches that we have
 // git branch Name ==> we can make a new branch with the name of Name
