@@ -1382,18 +1382,23 @@ begin
 end
 go
 
-************************************************************/
 -- #######################################################
 
-create procedure Cart.AddToCart
-	@UserId int not null,
-	@ProductId int not null,
-	@Quantity int not null
+create procedure Cart.AddAndUpdateItemsCart
+	@UserId int,
+	@ProductId int,
+	@Quantity int
 as
 begin
+	if @UserId is null or @ProductId is null or @Quantity is null
+	begin
+		;throw 50001, 'Parameters cannot be NULL', 1;
+	end
+
     set nocount on;
 	
 	declare @ProductPrice bigint;
+	declare @CartId int;
 
 	select @ProductPrice = Price
 	from Product.Products
@@ -1401,12 +1406,15 @@ begin
 
 	if @ProductPrice is null
 	begin
-		throw 50001, 'Product not found', 1;
+		;throw 50001, 'Product not found', 1;
 	end
 
 	if exists (select 1 from Cart.ShoppingCart where UserId = @UserId)
 	begin
-		declare @CartId int = (select CartId from Cart.ShoppingCart where UserId = @UserId)
+		set @CartId = (
+			select CartId from Cart.ShoppingCart
+			where UserId = @UserId
+		)
 		
 		if exists (
 			select 1 from Cart.Items 
@@ -1419,12 +1427,12 @@ begin
 		end
 		else
 		begin
+			insert into Cart.Items (CartId, ProductId, Quantity, Price)
+			values (@CartId, @ProductId, @Quantity, @ProductPrice)
 		end
 	end
 	else 
 	begin
-		declare @CartId int;
-		
 		insert into Cart.ShoppingCart (UserId)
 		values (@UserId)
 
@@ -1436,61 +1444,39 @@ begin
 end
 go
 
--- #######################################################
-declare @i int = 1
-while @i <= 10
-begin
-    declare @OrderItemList Sales.OrderItemListType;
-	declare @UserId int = 
-		(
-			select top 1 UserId 
-			from Auth.Users 
-			where RoleId = (select RoleId from Auth.Roles where RoleName = 'Customer')
-			order by newid()
-		) -- select a random UserId
-	
-	declare @j int = 1
-	while @j <= 4
-	begin
-		declare @ProductId int,
-				@Quantity smallint,
-				@Price bigint;
-
-		select top 1 
-			@ProductId = ProductId,
-			@Price = Price,
-			@Quantity = floor(rand() * 2) + 1
-		from Product.Products as pp
-	    where pp.ProductId not in (select ProductId from @OrderItemList)
-		order by newid() -- select a random product
-
-		insert into @OrderItemList (ProductId, Quantity, Price)
-		values (@ProductId, 2, @Price)
-
-		set @j = @j + 1
-	end
-
-	exec Sales.PlaceAnOrder @UserId, @OrderItemList
-	set @i = @i + 1
-end
-go
-
-
-create procedure Sales.PlaceAnOrder
-	@UserId int,
-	@OrderItemList Sales.OrderItemListType readonly
+create procedure Cart.RemoveItemsCart
+	@CartId int,
+	@ProductId int
 as
 begin
-    set nocount on;
-
-	declare @OrderId int;
-
-	insert into Sales.Orders (UserId, StateId)
-	values (@UserId, (select StateId from Sales.OrderStates where Title = 'processing'))
-
-	set @OrderId = SCOPE_IDENTITY()
-
-	insert into Sales.Items (OrderId, ProductId, Quantity, Price)
-	select @OrderId, ProductId, Quantity, Price from @OrderItemList
+	if @CartId is null or @ProductId is null
+	begin
+		;throw 50001, 'Parameters cannot be NULL', 1;
+	end
+	
+	set nocount on;
+	
+	delete from Cart.Items
+	where CartId = @CartId
+	and ProductId = @ProductId
 end
 go
+
+create procedure Cart.ClearCart
+	@CartId int
+as
+begin
+	if @CartId is null
+	begin
+		;throw 50001, 'Parameters cannot be NULL', 1;
+	end
+	
+	set nocount on;
+
+	delete from Cart.Items
+	where CartId = @CartId
+end
+go
+
+-- #######################################################
+************************************************************/
